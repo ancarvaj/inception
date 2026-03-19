@@ -6,6 +6,8 @@ all: up
 
 .PHONY: up
 up:
+	mkdir -p /home/$${USER}/data/wordpress
+	mkdir -p /home/$${USER}/data/mariadb
 	docker compose -f $(COMPOSE_PATH) up --build -d
 
 .PHONY: start
@@ -19,3 +21,4 @@ down:
 .PHONY: clear
 clear: down
 	-docker rmi $$(docker images -aq)
+	- docker volume rm $$(docker volume ls -q)
