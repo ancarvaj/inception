@@ -15,18 +15,18 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
 USE mysql;
 FLUSH PRIVILEGES;
 
--- Configurar contraseña de root para localhost y red
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD' WITH GRANT OPTION;
 
--- Crear base de datos de WordPress
 CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\`;
 
--- Crear usuario administrador de la base de datos
+CREATE USER IF NOT EXISTS '$MYSQL_ADMIN_USER'@'%' IDENTIFIED BY '$MYSQL_ADMIN_PASSWORD';
+GRANT ALL PRIVILEGES ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_ADMIN_USER'@'%';
+
+
 CREATE USER IF NOT EXISTS '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';
 GRANT ALL PRIVILEGES ON \`$MYSQL_DATABASE\`.* TO '$MYSQL_USER'@'%';
 
--- Limpieza de seguridad
 DELETE FROM mysql.user WHERE user='';
 DROP DATABASE IF EXISTS test;
 

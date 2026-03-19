@@ -3,11 +3,6 @@ set -e
 
 PHP_CONFIG="/var/www/html/wp-config.php"
 
-#WORDPRESS_DB_NAME="wordpress"
-#WORDPRESS_DB_USER="administrator"
-#WORDPRESS_DB_PASSWORD="inceptionstrongpass"
-#WORDPRESS_DB_HOST="mariadb"
-
 if [ ! -f /var/www/html/wp-settings.php ]; then
     wget https://wordpress.org/latest.tar.gz
     tar -xzvf latest.tar.gz

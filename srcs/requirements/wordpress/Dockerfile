@@ -1,10 +1,10 @@
 FROM alpine:3.22
 
-COPY config.sh /tmp/
+COPY conf/config.sh /tmp/
 
 RUN sh /tmp/config.sh
 
-COPY run.sh /
+COPY tools/run.sh /
 
 RUN chmod +x /run.sh
 
